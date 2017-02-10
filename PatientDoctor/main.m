@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Doctor.h"
+#import "Patient.h"
+
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
