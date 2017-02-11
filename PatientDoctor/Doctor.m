@@ -9,46 +9,46 @@
 #import "Doctor.h"
 #import "Patient.h"
 
-@implementation Doctor {
-    
-    Patient *patient;
+@implementation Doctor 
 
-}
 
-- (instancetype)initWithName:(NSString *)name initWithSpecialization:(NSString *)specialization {
+- (instancetype)initWithName:(NSString *)doctorName initWithSpecialization:(NSString *)specialization {
     
     if (self = [super init]) {
-        
-        _name = name;
+        _doctorName = doctorName;
         _specialization = specialization;
+        _collectionOfprescriptions = @{ @"TOOTHACHE": @"Medication 1",
+                                        @"SORE_EYE": @"Medication 2",
+                                        @"HEART_DISEASE": @"Medication 3"
+                                        };
+        _keepAcceptedPatients = [[NSMutableArray alloc] init];
     }
     return self;
 }
 
-- (BOOL) canAcceptPatient {
-    
-    if([patient hasValidCareCard]) {
-        return true;
-    }
-    else {
-        return false;
-    }
+
+- (void)visitDoctor: (Patient *) aPatient {
+    [self acceptPatient:(Patient *)aPatient];
 }
 
 
-- (Patient *) acceptPatient {
-    if([self canAcceptPatient]) {
-        [_keepAcceptedPatients addObject:patient];
-        return patient;
-        
+- (void)acceptPatient:(Patient *) aPatient {
+    if (aPatient.hasValidCareCard){
+        NSLog(@"%@ has a health card. How can we help you?", aPatient.patientName);
+        [_keepAcceptedPatients addObject:aPatient.patientName];
     }
     else {
-        return nil;
+        NSLog(@"%@ does not have a health card. We won't be able to help you.", aPatient.patientName);
     }
 }
 
-- (void) trackAcceptedPatients {
-    
+- (NSString *)createPrescription:(NSString *)patientSymptom {
+    return [_collectionOfprescriptions objectForKey:patientSymptom];
 }
 
 @end
+
+
+
+
+

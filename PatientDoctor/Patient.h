@@ -7,13 +7,23 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Doctor.h"
+#import "SharedInstance.h"
+
+@class Doctor;
 
 @interface Patient : NSObject
 
-@property NSString* name;
-@property int age;
+@property NSString *patientName;
+@property int patientAge;
 @property BOOL hasValidCareCard;
+@property NSString *patientSymptom;
 
-- (instancetype)initWithName:(NSString *)name initWithAge:(int)age initWithCareCard:(BOOL)hasValidCareCard;
-
+- (instancetype)initWithName:(NSString *)patientName initWithAge:(int)patientAge initWithCareCard:(BOOL)hasValidCareCard initWithSymptom:(NSString*)patientSymptom;
+- (void)visitedDoctor:(Doctor *)aDoctor;
+- (void)requestMedication:(Doctor *)aDoctor;
 @end
+
+
+
+

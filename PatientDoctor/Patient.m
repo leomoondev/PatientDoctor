@@ -8,17 +8,56 @@
 
 #import "Patient.h"
 
-@implementation Patient
+@implementation Patient {
+    
+    SharedInstance *sharedInstance;
+}
 
-- (instancetype)initWithName:(NSString *)name initWithAge:(int)age initWithCareCard:(BOOL)hasValidCareCard {
+- (instancetype)initWithName:(NSString *)patientName initWithAge:(int)patientAge initWithCareCard:(BOOL)hasValidCareCard initWithSymptom:(NSString*)patientSymptom{
     
     if (self = [super init]) {
-        _name = name;
-        _age = age;
+        
+        _patientName = patientName;
+        _patientAge = patientAge;
         _hasValidCareCard = hasValidCareCard;
+        _patientSymptom = patientSymptom;
+        NSLog(@"%@ has %@.", _patientName, _patientSymptom);
     }
     return self;
 }
 
 
+- (void)visitedDoctor:(Doctor *)aDoctor {
+    
+    NSLog(@"%@ visited %@!", _patientName, aDoctor.doctorName);
+    [aDoctor visitDoctor:self];
+    
+}
+
+- (void)requestMedication:(Doctor *)aDoctor {
+    if (_hasValidCareCard == YES){
+        NSLog(@"%@ requested medication.", _patientName);
+        NSString *currentPrescription = [aDoctor createPrescription:_patientSymptom];
+        
+        if ([sharedInstance.previousPrescriptions containsObject:currentPrescription]) {
+            NSLog(@"%@ has had same medication in the past.",_patientName);
+            
+        }
+        else  {
+            NSLog(@"%@ received %@!",_patientName, currentPrescription);
+            [sharedInstance.previousPrescriptions addObject:currentPrescription];
+            
+        }
+    }
+    else {
+        NSLog(@"%@ does not have permission to receive medication!", _patientName);
+    }
+    
+
+
+}
 @end
+
+
+
+

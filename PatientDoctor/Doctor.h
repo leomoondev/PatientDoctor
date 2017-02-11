@@ -9,19 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "Patient.h"
 
+@class Patient;
+
 @interface Doctor : NSObject
 
-@property NSString* name;
-@property NSString* specialization;
+@property NSString *doctorName;
+@property NSString *specialization;
+@property NSMutableArray *keepAcceptedPatients;
+@property NSDictionary *collectionOfprescriptions;
 
-@property NSMutableSet *keepAcceptedPatients;
-
-- (instancetype)initWithName:(NSString *)name initWithSpecialization:(NSString *)specialization;
-
-
-- (BOOL) canAcceptPatient;
-- (Patient *) acceptPatient;
-- (void) trackAcceptedPatients;
-
+- (instancetype)initWithName:(NSString *)doctorName initWithSpecialization:(NSString *)specialization;
+- (void)visitDoctor: (Patient *) aPatient;
+- (void)acceptPatient:(Patient *) aPatient;
+- (NSString *)createPrescription:(NSString *)patientSymptom;
 
 @end
