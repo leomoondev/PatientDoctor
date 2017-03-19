@@ -14,14 +14,15 @@
 
 @interface Patient : NSObject
 
-@property NSString *patientName;
-@property int patientAge;
-@property BOOL hasValidCareCard;
-@property NSString *patientSymptom;
+@property (copy) NSString *patientName;
+@property (nonatomic, assign) NSInteger patientAge;
+@property (nonatomic, assign) BOOL hasValidCareCard;
+@property (copy) NSString *patientSymptom;
 
 - (instancetype)initWithName:(NSString *)patientName initWithAge:(int)patientAge initWithCareCard:(BOOL)hasValidCareCard initWithSymptom:(NSString*)patientSymptom;
 - (void)visitedDoctor:(Doctor *)aDoctor;
 - (void)requestMedication:(Doctor *)aDoctor;
+
 @end
 
 

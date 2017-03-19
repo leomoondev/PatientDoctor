@@ -13,10 +13,10 @@
 
 @interface Doctor : NSObject
 
-@property NSString *doctorName;
-@property NSString *specialization;
-@property NSMutableArray *keepAcceptedPatients;
-@property NSDictionary *collectionOfprescriptions;
+@property (copy) NSString *doctorName;
+@property (copy) NSString *specialization;
+@property (nonatomic, strong) NSMutableArray *keepAcceptedPatients;
+@property (nonatomic,strong) NSDictionary *collectionOfprescriptions;
 
 - (instancetype)initWithName:(NSString *)doctorName initWithSpecialization:(NSString *)specialization;
 - (void)visitDoctor: (Patient *) aPatient;

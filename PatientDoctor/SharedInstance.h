@@ -17,8 +17,6 @@
 
 @property NSMutableArray *previousPrescriptions;
 
-
-
 @end
 
 
